@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body {
+    background: linear-gradient(135deg, #12f01d, #c3cfe2);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.welcome {
+    color: #0c0b0c;
+    font-size: 35px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+.love {
+    color: #0e0d0e;
+    font-size: 35px;
+    margin-bottom: 20px;
+    margin-top: 15px;
+    
+    letter-spacing: 2px;
+}
+.img{
+              transform: scale(1.8);
+                  transform-origin: center;
+               width: 100%;
+               height: 100%;
+               border-radius: 50%;
+             
+                vertical-align:text-bottom;
+                border-image-width: auto;
+                object-fit: cover;
+                background-color: #3414c2;
+     }
+
+.img_box{
+               overflow: hidden;
+                
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                
+               }
+/* Interactive Buttons Styling */
+a {
+    text-decoration: none;
+    width: 220px;
+    margin: 8px 0;
+}
+
+button {
+    width: 100%;
+    padding: 12px 20px;
+    background-color: #ffffff;
+    color: #2c3e50;
+    border: 2px solid #3498db;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover Effect jab mouse button par jaye */
+button:hover {
+    background-color: #3498db;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(52, 152, 219, 0.3);
+}
+        </style>
+    </head>
+    <body>
+            <h1 class="welcome">WELCOME TO</h1>
+     <div class="img_box"><image class="img" src="/static/s_logo.jpg" alt="Profile Image"></image></div>
+        <h2 class="love">SuperEasy.Dev</h2>
+        
+         
+        <A class="youtube" href="https://www.youtube.com/@ads387"><button>YouTube</button></A>
+        <A class="insta" href=""><button>Instagram</button></A>
+        <A class="git" href=""><button>GitHub</button></A>
+        <A class="linkden" href=""><button>LinkedIn</button></A>
+        <A class="free" href="users"><button>Free Resources</button></A>
+    </body>
+</html>

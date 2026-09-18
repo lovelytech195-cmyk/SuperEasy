@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Quiz App</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .quiz-card {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+        h3 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .options-list {
+            list-style: none;
+            padding: 0;
+        }
+        .option-btn {
+            display: block;
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            background-color: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            text-align: left;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .option-btn:hover:not(:disabled) {
+            background-color: #e2e6ea;
+            border-color: #dae0e5;
+        }
+        .option-btn.correct {
+            background-color: #d4edda !important;
+            border-color: #28a745 !important;
+            color: #155724;
+        }
+        .option-btn.wrong {
+            background-color: #f8d7da !important;
+            border-color: #dc3545 !important;
+            color: #721c24;
+        }
+        .option-btn:disabled {
+            cursor: not-allowed;
+        }
+        .action-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #prev-btn {
+            background-color: #6c757d;
+            color: white;
+            display: none;
+        }
+        #prev-btn:hover {
+            background-color: #5a6268;
+        }
+        #next-btn {
+            background-color: #007bff;
+            color: white;
+            display: none;
+        }
+        #next-btn:hover {
+            background-color: #0056b3;
+        }
+        #solution-box {
+            margin-top: 15px;
+            padding: 12px;
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            border-radius: 6px;
+            color: #856404;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-card">
+        <div id="question-container">
+            <h3 id="question-title">Question text goes here</h3>
+            <div class="options-list" id="options-list"></div>
+        </div>
+
+        <div id="solution-box"></div>
+
+        <div class="action-container">
+            <button class="btn" id="prev-btn" onclick="prevQuestion()">Previous</button>
+            <button class="btn" id="next-btn" onclick="nextQuestion()">Next Question</button>
+        </div>
+    </div>
+
+    <script>
+        // Flask data parsing safely
+        const quizData = JSON.parse('{{ data | tojson | safe }}');
+        let currentIdx = 0;
+
+        const questionTitle = document.getElementById("question-title");
+        const optionsList = document.getElementById("options-list");
+        const prevBtn = document.getElementById("prev-btn");
+        const nextBtn = document.getElementById("next-btn");
+        const solutionBox = document.getElementById("solution-box");
+
+        function loadQuestion() {
+            nextBtn.style.display = "none";
+            solutionBox.style.display = "none";
+            solutionBox.innerHTML = "";
+            optionsList.innerHTML = "";
+
+            const currentQ = quizData.questions[currentIdx];
+            questionTitle.innerText = `Q${currentIdx + 1}. ${currentQ.question}`;
+
+            // Previous button visibility toggle
+            if (currentIdx === 0) {
+                prevBtn.style.display = "none";
+            } else {
+                prevBtn.style.display = "block";
+            }
+
+            // Options generation
+            for (let key in currentQ.options) {
+                const btn = document.createElement("button");
+                btn.className = "option-btn";
+                btn.innerText = `${key}. ${currentQ.options[key]}`;
+                btn.onclick = () => checkAnswer(key, currentQ.correct_answer, currentQ.detailed_explanation, btn);
+                optionsList.appendChild(btn);
+            }
+        }
+
+        function checkAnswer(selectedKey, correctKey, explanation, selectedBtn) {
+            const allButtons = optionsList.getElementsByClassName("option-btn");
+
+            for (let btn of allButtons) {
+                btn.disabled = true;
+            }
+
+            if (selectedKey === correctKey) {
+                selectedBtn.classList.add("correct");
+            } else {
+                selectedBtn.classList.add("wrong");
+                for (let btn of allButtons) {
+                    if (btn.innerText.startsWith(correctKey)) {
+                        btn.classList.add("correct");
+                    }
+                }
+            }
+
+            if (explanation) {
+                solutionBox.style.display = "block";
+                solutionBox.innerHTML = `<strong>Explanation:</strong> ${explanation}`;
+            }
+
+            nextBtn.style.display = "block";
+            if (currentIdx === quizData.questions.length - 1) {
+                nextBtn.innerText = "Finish Quiz";
+            } else {
+                nextBtn.innerText = "Next Question";
+            }
+        }
+
+        function nextQuestion() {
+            currentIdx++;
+            if (currentIdx < quizData.questions.length) {
+                loadQuestion();
+            } else {
+                document.querySelector(".quiz-card").innerHTML = `<h2>Quiz Completed! 🎉</h2><p>Aapne sabhi questions successfully complete kar liye hain.</p>`;
+            }
+        }
+
+        function prevQuestion() {
+            if (currentIdx > 0) {
+                currentIdx--;
+                loadQuestion();
+            }
+        }
+
+        // Initialize first question
+        loadQuestion();
+    </script>
+
+</body>
+</html>
