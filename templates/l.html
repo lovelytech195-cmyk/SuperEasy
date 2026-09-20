@@ -1,96 +1,286 @@
 <!DOCTYPE html>
-<html>
-    <head>
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style>
-            body {
-    background: linear-gradient(135deg, #12f01d, #c3cfe2);
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SuperEasy-Free Courses</title>
+    <style>
+        /* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f7f6;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header */
+header {
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #4f46e5;
+}
+
+nav a {
+    text-decoration: none;
+    color: #555;
+    margin-left: 20px;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #4f46e5;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, #4f46e5, #3b82f6);
+    color: white;
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.hero h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.btn-primary {
+    display: inline-block;
+    background: white;
+    color: #4f46e5;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.btn-primary:hover {
+    background: #e0e7ff;
+}
+
+/* Courses Section */
+.courses-section {
+    padding: 50px 10%;
+    text-align: center;
+}
+
+.courses-section h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+/* Filter Buttons */
+.filter-buttons {
+    margin-bottom: 30px;
+}
+
+.filter-btn {
+    background: #e2e8f0;
+    border: none;
+    padding: 8px 16px;
+    margin: 0 5px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.filter-btn.active, .filter-btn:hover {
+    background: #4f46e5;
+    color: white;
+}
+
+/* Course Grid */
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    text-align: left;
+}
+
+.course-card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-sizing: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
+    justify-content: space-between;
 }
 
-.welcome {
-    color: #0c0b0c;
-    font-size: 35px;
+.course-card:hover {
+    transform: translateY(-5px);
+}
+
+.course-card h3 {
+    font-size: 20px;
     margin-bottom: 10px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-.love {
-    color: #0e0d0e;
-    font-size: 35px;
-    margin-bottom: 20px;
-    margin-top: 15px;
-    
-    letter-spacing: 2px;
-}
-.img{
-              transform: scale(1.8);
-                  transform-origin: center;
-               width: 100%;
-               height: 100%;
-               border-radius: 50%;
-             
-                vertical-align:text-bottom;
-                border-image-width: auto;
-                object-fit: cover;
-                background-color: #3414c2;
-     }
-
-.img_box{
-               overflow: hidden;
-                
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                
-               }
-/* Interactive Buttons Styling */
-a {
-    text-decoration: none;
-    width: 220px;
-    margin: 8px 0;
+    color: #1e293b;
 }
 
-button {
-    width: 100%;
-    padding: 12px 20px;
-    background-color: #ffffff;
-    color: #2c3e50;
-    border: 2px solid #3498db;
-    border-radius: 30px;
-    font-size: 16px;
+.course-card p {
+    color: #64748b;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.price {
+    font-size: 18px;
     font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: #059669;
+    margin-bottom: 15px;
+    display: block;
 }
 
-/* Hover Effect jab mouse button par jaye */
-button:hover {
-    background-color: #3498db;
+.enroll-btn {
+    background: #4f46e5;
     color: white;
-    transform: translateY(-3px);
-    box-shadow: 0 6px 12px rgba(52, 152, 219, 0.3);
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    transition: background 0.3s;
 }
-        </style>
-    </head>
-    <body>
-            <h1 class="welcome">WELCOME TO</h1>
-     <div class="img_box"><image class="img" src="/static/s_logo.jpg" alt="Profile Image"></image></div>
-        <h2 class="love">SuperEasy.Dev</h2>
+
+.enroll-btn:hover {
+    background: #4338ca;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #1e293b;
+    color: white;
+    margin-top: 50px;
+}
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+     
+    <header>
+        <div class="logo">SuperEasy</div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#courses">Courses</a>
+            <a href="#about">About</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <h1>Learn Without Limits</h1>
+        <p>Explore our wide range of courses and upgrade your skills today.</p>
+        <a href="#courses" class="btn-primary">Browse Courses</a>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses" class="courses-section">
+        <h2>Our Courses</h2>
         
-         
-        <A class="youtube" href="https://www.youtube.com/@ads387"><button>YouTube</button></A>
-        <A class="insta" href=""><button>Instagram</button></A>
-        <A class="git" href=""><button>GitHub</button></A>
-        <A class="linkden" href=""><button>LinkedIn</button></A>
-        <A class="free" href="users"><button>Free Resources</button></A>
-    </body>
+        <!-- Category Filter Buttons -->
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="development">Development</button>
+            <button class="filter-btn" data-filter="design">Design</button>
+            <button class="filter-btn" data-filter="business">Business</button>
+        </div>
+
+        <!-- Course Grid -->
+        <div class="course-grid">
+            <!-- Course 1 -->
+           
+
+            <!-- Course 2 -->
+            
+
+            <!-- Course 3 -->
+            
+
+            <!-- Course 4 -->
+            <div class="course-card" data-category="development">
+                <h3>Python for Beginner</h3>
+                <p>Learn Python, Pandas, NumPy, and basic machine learning.</p>
+                <span class="price">Free</span>
+               <a href="/users"><button  class="enroll-btn">Enroll Now</button></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 SkillHub. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript File -->
+    <script>
+        // --- Filtering Functionality ---
+const filterButtons = document.querySelectorAll('.filter-btn');
+const courseCards = document.querySelectorAll('.course-card');
+
+filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        // Remove active class from all buttons and add to the clicked one
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        const filterValue = button.getAttribute('data-filter');
+
+        // Show or hide courses based on category
+        courseCards.forEach(card => {
+            const category = card.getAttribute('data-category');
+            if (filterValue === 'all' || category === filterValue) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+});
+
+// --- Interactive Enroll Button ---
+const enrollButtons = document.querySelectorAll('.enroll-btn');
+
+enrollButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+        const courseTitle = e.target.parentElement.querySelector('h3').innerText;
+        alert(`🎉 Success! You have successfully enrolled in: "${courseTitle}".`);
+        button.innerText = "Enrolled ✔";
+        button.style.backgroundColor = "#059669";
+        button.disabled = true;
+    });
+});
+    </script>
+</body>
 </html>
